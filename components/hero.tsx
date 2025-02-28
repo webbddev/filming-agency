@@ -101,8 +101,8 @@ const Hero = () => {
             variants={contentVariants}
             className='text-xl text-[#7b7b7b] mb-8'
           >
-            We're filmmakers, photographers, and marketers passionate about helping
-            businesses <br />
+            We&apos;re filmmakers, photographers, and marketers passionate about
+            helping businesses <br />
             tell their stories and connect with their audience
           </motion.p>
 

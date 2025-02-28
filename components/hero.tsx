@@ -3,6 +3,7 @@
 import React from 'react';
 import { motion, useScroll, useTransform, easeOut } from 'framer-motion';
 import Link from 'next/link';
+import { WordRotate } from './magicui/word-rotate';
 
 const Hero = () => {
   const { scrollY } = useScroll();
@@ -89,7 +90,8 @@ const Hero = () => {
             className='text-4xl font-extrabold md:text-6xl md:font-bold text-gray-900 mb-4'
           >
             <motion.span className='inline-block' variants={contentVariants}>
-              Crafting Compelling Videos and Stunning Photos
+              Crafting Compelling{' '}
+              <WordRotate words={['Content', 'Videos', 'Stunning Photos']} duration={2400}/>
             </motion.span>
             <br />
             <motion.span className='inline-block' variants={contentVariants}>

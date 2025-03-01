@@ -11,11 +11,11 @@ const statsData = [
   { number: '98', suffix: '', label: 'Net Promoting Score' },
 ];
 
-interface StatCardProps {
+type StatCardProps = {
   number: string;
   suffix: string;
   label: string;
-}
+};
 
 // Stat card component
 const StatCard = ({ number, label, suffix }: StatCardProps) => {

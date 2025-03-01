@@ -26,7 +26,8 @@ interface Founder {
   social: Social;
 }
 
-const founders: Founder[] = [
+// Founders data
+const FOUNDERS_DATA: Founder[] = [
   {
     name: 'Alex Johnson',
     role: 'CEO & Founder',
@@ -51,6 +52,7 @@ const founders: Founder[] = [
       website: 'https://website.com',
     },
   },
+  // ... other founder entries remain the same ...
   {
     name: 'Morgan Smith',
     role: 'Marketing Director',
@@ -129,7 +131,6 @@ const founders: Founder[] = [
     },
   },
 ];
-
 const Founders = () => {
   const [startIndex, setStartIndex] = useState(0);
   const [itemsToShow, setItemsToShow] = useState(4);
@@ -186,7 +187,7 @@ const Founders = () => {
       setIsMobile(mobile);
       setItemsToShow(mobile ? 2 : 4);
       setStartIndex((prev) => {
-        const maxStart = founders.length - (mobile ? 2 : 4);
+        const maxStart = FOUNDERS_DATA.length - (mobile ? 2 : 4);
         return prev > maxStart ? maxStart : prev;
       });
     };
@@ -194,12 +195,12 @@ const Founders = () => {
     handleResize();
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
-  }, [founders.length]);
+  }, [FOUNDERS_DATA.length]);
 
   const next = () => {
     setStartIndex((prev) => {
       const nextIndex = prev + 1;
-      const maxStart = founders.length - itemsToShow;
+      const maxStart = FOUNDERS_DATA.length - itemsToShow;
       return nextIndex > maxStart ? 0 : nextIndex;
     });
   };
@@ -207,7 +208,7 @@ const Founders = () => {
   const prev = () => {
     setStartIndex((prev) => {
       const nextIndex = prev - 1;
-      return nextIndex < 0 ? founders.length - itemsToShow : nextIndex;
+      return nextIndex < 0 ? FOUNDERS_DATA.length - itemsToShow : nextIndex;
     });
   };
 
@@ -225,7 +226,7 @@ const Founders = () => {
     const swipeThreshold = 50;
     if (
       info.offset.x < -swipeThreshold &&
-      startIndex < founders.length - itemsToShow
+      startIndex < FOUNDERS_DATA.length - itemsToShow
     ) {
       next();
     } else if (info.offset.x > swipeThreshold && startIndex > 0) {
@@ -233,7 +234,7 @@ const Founders = () => {
     }
   };
 
-  const visibleFounders = founders.slice(startIndex, startIndex + itemsToShow);
+  const visibleFounders = FOUNDERS_DATA.slice(startIndex, startIndex + itemsToShow);
 
   return (
     <div

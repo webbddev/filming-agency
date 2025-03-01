@@ -34,7 +34,7 @@ const CompanyLogo = ({ name, logo }: { name: string; logo: string }) => {
 const Trusted = () => {
   return (
     <div className={cn('w-full overflow-hidden bg-white py-12 ')}>
-      <div className='mb-8 text-center'>
+      <div className='mb-8 text-center px-2'>
         <h2 className='text-2xl font-semibold text-gray-900 mb-4'>
           Trusted by Moldova&apos;s leading companies
         </h2>

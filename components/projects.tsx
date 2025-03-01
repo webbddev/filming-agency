@@ -205,7 +205,7 @@ const Projects = () => {
 
   return (
     <section className='w-full bg-white py-16 md:mx-auto 2xl:w-4/5 md:px-16'>
-      <div className='mx-auto mb-12 px-6 md:px-0'>
+      <div className='mx-auto mb-12 px-2 md:px-0'>
         <h2 className='text-4xl font-bold text-gray-900 mb-4'>
           Explore our projects
         </h2>
@@ -214,7 +214,7 @@ const Projects = () => {
         </p>
       </div>
 
-      <div className='w-full h-[800px] flex items-center justify-center overflow-hidden py-8'>
+      <div className='w-full h-[800px] 2xl:h-[1000px] flex items-center justify-center overflow-hidden py-8'>
         
         <Marquee
           vertical

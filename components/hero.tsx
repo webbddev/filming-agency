@@ -84,7 +84,7 @@ const Hero = () => {
         viewport={{ once: true }}
         variants={contentVariants}
       >
-        <div className='md:max-w-5xl text-center px-8'>
+        <div className='md:max-w-5xl text-center px-5'>
           <motion.h1
             variants={contentVariants}
             className='text-4xl font-extrabold md:text-6xl md:font-bold text-gray-900 mb-4'

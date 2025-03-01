@@ -1,6 +1,9 @@
+import FAQs from '@/components/faq';
+import Founders from '@/components/founders';
 import Hero from '@/components/hero';
 import Navbar from '@/components/navbar';
 import Projects from '@/components/projects';
+import Statistics from '@/components/statistics';
 import Trusted from '@/components/trusted';
 
 export default function Home() {
@@ -10,6 +13,9 @@ export default function Home() {
       <Hero />
       <Trusted />
       <Projects />
+      <Founders />
+      <Statistics />
+      <FAQs />
     </div>
   );
 }

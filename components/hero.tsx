@@ -91,7 +91,10 @@ const Hero = () => {
           >
             <motion.span className='inline-block' variants={contentVariants}>
               Crafting Compelling{' '}
-              <WordRotate words={['Content', 'Videos', 'Stunning Photos']} duration={2400}/>
+              <WordRotate
+                words={['Content', 'Videos', 'Stunning Photos']}
+                duration={2400}
+              />
             </motion.span>
             <br />
             <motion.span className='inline-block' variants={contentVariants}>

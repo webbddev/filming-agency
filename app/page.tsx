@@ -1,5 +1,6 @@
 import Hero from '@/components/hero';
 import Navbar from '@/components/navbar';
+import Projects from '@/components/projects';
 import Trusted from '@/components/trusted';
 
 export default function Home() {
@@ -8,6 +9,7 @@ export default function Home() {
       <Navbar />
       <Hero />
       <Trusted />
+      <Projects />
     </div>
   );
 }

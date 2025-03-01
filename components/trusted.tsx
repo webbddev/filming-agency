@@ -4,13 +4,13 @@ import { cn } from '@/lib/utils';
 import Image from 'next/image';
 
 const companies = [
-  { name: 'coca-cola', logo: '/logos/logo1.svg' },
-  { name: 'amazon', logo: '/logos/logo2.svg' },
-  { name: 'forbes', logo: '/logos/logo3.svg' },
-  { name: 'booking', logo: '/logos/logo4.svg' },
-  { name: 'microsoft', logo: '/logos/logo5.svg' },
-  { name: 'paypal', logo: '/logos/logo6.svg' },
-  { name: 'redbull', logo: '/logos/logo7.svg' },
+  { name: 'coca-cola', logo: '/img/logos/logo-1.svg' },
+  { name: 'amazon', logo: '/img/logos/logo-2.svg' },
+  { name: 'forbes', logo: '/img/logos/logo-3.svg' },
+  { name: 'booking', logo: '/img/logos/logo-4.svg' },
+  { name: 'microsoft', logo: '/img/logos/logo-5.svg' },
+  { name: 'paypal', logo: '/img/logos/logo-6.svg' },
+  { name: 'redbull', logo: '/img/logos/logo-7.svg' },
 ];
 
 const firstRow = companies.slice(0, Math.ceil(companies.length / 2));
@@ -25,7 +25,7 @@ const CompanyLogo = ({ name, logo }: { name: string; logo: string }) => {
         height={200}
         src={logo}
         alt={`${name} logo`}
-        className='w-16 h-16'
+        className='w-20 h-20'
       />
     </div>
   );

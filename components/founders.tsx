@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-
 import Image from 'next/image';
 import {
   PiArrowArcLeft,
@@ -12,19 +11,66 @@ import {
   PiTwitterLogo,
 } from 'react-icons/pi';
 
-interface Social {
+// TypeScript types
+type Social = {
   linkedin: string;
   twitter: string;
   website?: string;
-}
+};
 
-interface Founder {
+type Founder = {
   name: string;
   role: string;
   image: string;
   description: string;
   social: Social;
-}
+};
+
+// Animation configurations
+const containerAnimations = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0,
+    },
+  },
+  exit: {
+    opacity: 0,
+    transition: {
+      staggerChildren: 0.05,
+      staggerDirection: -1,
+      duration: 0.2,
+    },
+  },
+};
+
+const itemAnimations = {
+  hidden: {
+    opacity: 0,
+    y: 20,
+    scale: 0.95,
+  },
+  show: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      type: 'spring',
+      duration: 0.5,
+      bounce: 0.4,
+    },
+  },
+  exit: {
+    opacity: 0,
+    y: -20,
+    scale: 0.95,
+    transition: {
+      duration: 0.3,
+    },
+  },
+};
 
 // Founders data
 const FOUNDERS_DATA: Founder[] = [
@@ -52,7 +98,6 @@ const FOUNDERS_DATA: Founder[] = [
       website: 'https://website.com',
     },
   },
-  // ... other founder entries remain the same ...
   {
     name: 'Morgan Smith',
     role: 'Marketing Director',
@@ -131,72 +176,93 @@ const FOUNDERS_DATA: Founder[] = [
     },
   },
 ];
+
+// Extracted FounderCard component
+const FounderCard = ({ founder }: { founder: Founder }) => {
+  return (
+    <motion.div variants={itemAnimations} className='md:mb-0 mb-8'>
+      <div className='bg-gray-100 aspect-square mb-4 overflow-hidden'>
+        <Image
+          priority
+          width={500}
+          height={500}
+          src={founder.image}
+          alt={founder.name}
+          className='w-full h-full object-cover'
+        />
+      </div>
+      <h3 className='font-bold text-lg mb-1'>{founder.name}</h3>
+      <p className='text-[#7b7b7b] text-sm mb-2'>{founder.role}</p>
+      <p className='text-gray-700 text-sm mb-4'>{founder.description}</p>
+
+      <div className='flex gap-4'>
+        <motion.div
+          whileHover={{ scale: 1.15 }}
+          transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+        >
+          <PiLinkedinLogo className='w-5 h-5 text-[#7b7b7b] hover:text-gray-900 cursor-pointer' />
+        </motion.div>
+
+        <motion.div
+          whileHover={{ scale: 1.15 }}
+          transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+        >
+          <PiTwitterLogo className='w-5 h-5 text-[#7b7b7b] hover:text-gray-900 cursor-pointer' />
+        </motion.div>
+
+        {founder.social.website && (
+          <motion.div
+            whileHover={{ scale: 1.15 }}
+            transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+          >
+            <PiGlobe className='w-5 h-5 text-[#7b7b7b] hover:text-gray-900 cursor-pointer' />
+          </motion.div>
+        )}
+      </div>
+    </motion.div>
+  );
+};
+
+// Utility type for pan information from Framer Motion
+type PanInfo = {
+  offset: {
+    x: number;
+    y: number;
+  };
+  velocity: {
+    x: number;
+  };
+};
+
 const Founders = () => {
+  // State management
   const [startIndex, setStartIndex] = useState(0);
   const [itemsToShow, setItemsToShow] = useState(4);
   const [isMobile, setIsMobile] = useState(false);
 
-  const container = {
-    hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0,
-      },
-    },
-    exit: {
-      opacity: 0,
-      transition: {
-        staggerChildren: 0.05,
-        staggerDirection: -1,
-        duration: 0.2,
-      },
-    },
-  };
-
-  const item = {
-    hidden: {
-      opacity: 0,
-      y: 20,
-      scale: 0.95,
-    },
-    show: {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      transition: {
-        type: 'spring',
-        duration: 0.5,
-        bounce: 0.4,
-      },
-    },
-    exit: {
-      opacity: 0,
-      y: -20,
-      scale: 0.95,
-      transition: {
-        duration: 0.3,
-      },
-    },
-  };
-
+  // Handle responsive behavior
   useEffect(() => {
     const handleResize = () => {
       const mobile = window.innerWidth < 768;
       setIsMobile(mobile);
       setItemsToShow(mobile ? 2 : 4);
+
+      // Ensure startIndex doesn't go out of bounds after resize
       setStartIndex((prev) => {
         const maxStart = FOUNDERS_DATA.length - (mobile ? 2 : 4);
         return prev > maxStart ? maxStart : prev;
       });
     };
 
+    // Set initial state and add listener
     handleResize();
     window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, [FOUNDERS_DATA.length]);
 
+    // Clean up
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  // Navigation handlers
   const next = () => {
     setStartIndex((prev) => {
       const nextIndex = prev + 1;
@@ -212,18 +278,10 @@ const Founders = () => {
     });
   };
 
-  type PanInfo = {
-    offset: {
-      x: number;
-      y: number;
-    };
-    velocity: {
-      x: number;
-    };
-  };
-
+  // Handle mobile swipe gestures
   const handleDragEnd = (_event: never, info: PanInfo) => {
     const swipeThreshold = 50;
+
     if (
       info.offset.x < -swipeThreshold &&
       startIndex < FOUNDERS_DATA.length - itemsToShow
@@ -234,15 +292,15 @@ const Founders = () => {
     }
   };
 
-  const visibleFounders = FOUNDERS_DATA.slice(startIndex, startIndex + itemsToShow);
+  // Get visible founders based on current index
+  const visibleFounders = FOUNDERS_DATA.slice(
+    startIndex,
+    startIndex + itemsToShow
+  );
 
   return (
-    <div
-      className='px-6 
-      mx-auto 2xl:w-4/5 md:px-16
-      
-      py-16 md:py-32'
-    >
+    <div className='px-6 mx-auto 2xl:w-4/5 md:px-16 py-16 md:py-32'>
+      {/* Header section */}
       <div className='flex justify-between items-center mb-12'>
         <div>
           <h2 className='text-3xl font-bold mb-2'>
@@ -252,22 +310,33 @@ const Founders = () => {
             Meet the passionate experts driving our AI solutions.
           </p>
         </div>
+
+        {/* Navigation buttons - desktop only */}
         <div className='hidden md:flex gap-2'>
-          <motion.button onClick={prev}>
+          <motion.button
+            onClick={prev}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
             <PiArrowArcLeft className='text-black border rounded-full flex items-center justify-center text-5xl p-3 hover:bg-black/10 transition-colors' />
           </motion.button>
-          <motion.button onClick={next}>
+          <motion.button
+            onClick={next}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
             <PiArrowArcRight className='text-black border rounded-full flex items-center justify-center text-5xl p-3 hover:bg-black/10 transition-colors' />
           </motion.button>
         </div>
       </div>
 
+      {/* Team members carousel */}
       <div className='relative max-w-full overflow-hidden'>
         <AnimatePresence mode='wait'>
           <motion.div
             className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-8'
             key={startIndex}
-            variants={container}
+            variants={containerAnimations}
             initial='hidden'
             animate='show'
             exit='exit'
@@ -281,53 +350,7 @@ const Founders = () => {
             }}
           >
             {visibleFounders.map((founder, index) => (
-              <motion.div
-                key={`${founder.name}-${index}`}
-                variants={item}
-                className='md:mb-0 mb-8'
-              >
-                <div className='bg-gray-100 aspect-square mb-4 overflow-hidden'>
-                  <Image
-                    priority
-                    width={500}
-                    height={500}
-                    src={founder.image}
-                    alt={founder.name}
-                    className='w-full h-full object-cover'
-                  />
-                </div>
-                <h3 className='font-bold text-lg mb-1'>{founder.name}</h3>
-                <p className='text-[#7b7b7b] text-sm mb-2'>{founder.role}</p>
-                <p className='text-gray-700 text-sm mb-4'>
-                  {founder.description}
-                </p>
-                <div className='flex gap-4'>
-                  <motion.div
-                    whileHover={{ scale: 1.15 }}
-                    transition={{ type: 'spring', stiffness: 400, damping: 17 }}
-                  >
-                    <PiLinkedinLogo className='w-5 h-5 text-[#7b7b7b] hover:text-gray-900 cursor-pointer' />
-                  </motion.div>
-                  <motion.div
-                    whileHover={{ scale: 1.15 }}
-                    transition={{ type: 'spring', stiffness: 400, damping: 17 }}
-                  >
-                    <PiTwitterLogo className='w-5 h-5 text-[#7b7b7b] hover:text-gray-900 cursor-pointer' />
-                  </motion.div>
-                  {founder.social.website && (
-                    <motion.div
-                      whileHover={{ scale: 1.15 }}
-                      transition={{
-                        type: 'spring',
-                        stiffness: 400,
-                        damping: 17,
-                      }}
-                    >
-                      <PiGlobe className='w-5 h-5 text-[#7b7b7b] hover:text-gray-900 cursor-pointer' />
-                    </motion.div>
-                  )}
-                </div>
-              </motion.div>
+              <FounderCard key={`${founder.name}-${index}`} founder={founder} />
             ))}
           </motion.div>
         </AnimatePresence>

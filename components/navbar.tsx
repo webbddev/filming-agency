@@ -110,7 +110,7 @@ const Navbar = () => {
         <div className='mx-auto flex justify-between items-center h-full px-6 md:px-10'>
           <Link href={'/'} className='flex items-center space-x-1'>
             <div className='rounded-full bg-black w-6 h-6 ' />
-            <span className='text-xl font-bold'>Awesome Studio</span>
+            <span className='text-xl font-bold'>Alevtina Studio</span>
           </Link>
 
           {/* desktop menu */}
@@ -157,7 +157,7 @@ const Navbar = () => {
                 href={link.href}
                 key={link.href}
                 className={`${
-                  pathname === link.href ? 'text-black' : 'text-neutral-400'
+                  pathname === link.href ? 'text-teal-500' : 'text-neutral-400'
                 } hover:text-black`}
               >
                 {link.label}

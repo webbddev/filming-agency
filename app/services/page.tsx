@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Process from './components/process';
 import Impact from './components/impact';
 import Navbar from '@/components/navbar';
-import Footer from '@/components/footer';
+// import Footer from '@/components/footer';
 import Industries from './components/industries';
 import { servicesData } from './data/services-data';
 
@@ -61,7 +61,7 @@ const Services = () => {
                 <p className='text-[#7b7b7b] mb-12'>{service.description}</p>
 
                 <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
-                  {service.benefits.map((benefit, benefitIndex) => (
+                  {service.benefits?.map((benefit, benefitIndex) => (
                     <div
                       className='flex items-center space-x-2'
                       key={benefitIndex}
@@ -75,7 +75,7 @@ const Services = () => {
           ))}
         </div>
       </div>
-
+      {/* Components from the folder */}
       <Process />
       <Impact />
       <Industries />

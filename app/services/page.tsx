@@ -102,11 +102,10 @@ const Services = () => {
         <div className='mx-auto flex items-center'>
           <div className='md:w-2/3'>
             <h1 className='text-4xl xl:text-6xl 2xl:text-7xl font-bold mb-8'>
-              Bring Your Brand's Story to Life
+              Bring Your Brand&apos;s Story to Life
             </h1>
             <p className='text-xl text-neutral-500'>
-              We produce high-quality photos, videos, and content that capture
-              your brand's essence and engage your audience across all platforms
+              We produce high-quality photos, videos, and content that capture your brand&apos;s essence and engage your audience across all platforms
             </p>
           </div>
         </div>

@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Plus_Jakarta_Sans } from 'next/font/google';
 import './globals.css';
 import Footer from '@/components/footer';
+import Navbar from '@/components/navbar';
 // import { Analytics } from '@vercel/analytics/next';
 
 const plusJakartaSans = Plus_Jakarta_Sans({
@@ -22,6 +23,7 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body className={`${plusJakartaSans.className} antialiased`}>
+        <Navbar  />
         {children}
         <Footer />
         {/* <Analytics /> */}

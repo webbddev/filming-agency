@@ -3,16 +3,13 @@ import Brands from './components/brands';
 import Image from 'next/image';
 import Process from './components/process';
 import Impact from './components/impact';
-import Navbar from '@/components/navbar';
-// import Footer from '@/components/footer';
+
 import Industries from './components/industries';
 import { servicesData } from './data/services-data';
 
 const Services = () => {
   return (
     <div className='md:min-h-screen bg-white'>
-      <Navbar />
-
       {/* hero section */}
 
       <div className='pt-32 pb-20 px-6 mx-auto 2xl:w-4/5 md:px-16'>
@@ -79,7 +76,6 @@ const Services = () => {
       <Process />
       <Impact />
       <Industries />
-      {/* <Footer /> */}
     </div>
   );
 };

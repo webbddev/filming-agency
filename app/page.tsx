@@ -1,5 +1,5 @@
 import FAQs from '@/components/faq';
-import Footer from '@/components/footer';
+// import Footer from '@/components/footer';
 import Founders from '@/components/founders';
 import Hero from '@/components/hero';
 import Navbar from '@/components/navbar';
@@ -17,7 +17,7 @@ export default function Home() {
       <Founders />
       <Statistics />
       <FAQs />
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }

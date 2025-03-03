@@ -23,7 +23,7 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body className={`${plusJakartaSans.className} antialiased`}>
-        <Navbar  />
+        <Navbar />
         {children}
         <Footer />
         {/* <Analytics /> */}
